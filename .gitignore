@@ -1,0 +1,59 @@
+# =========================================================
+# .NET
+# =========================================================
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+publish/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# =========================================================
+# Base de datos local y logs (nunca se commitean)
+# =========================================================
+*.db
+*.db-shm
+*.db-wal
+logs/
+*.log
+
+# Archivos subidos (blob local en disco)
+src/Indigo.Api/wwwroot/uploads/
+uploads/
+
+# =========================================================
+# Node / Angular
+# =========================================================
+node_modules/
+dist/
+.angular/
+coverage/
+*.tsbuildinfo
+
+# =========================================================
+# Entorno y secretos
+# =========================================================
+.env
+.env.*
+!.env.example
+appsettings.Development.local.json
+*.pfx
+
+# =========================================================
+# IDE / SO
+# =========================================================
+.idea/
+.DS_Store
+Thumbs.db
+
+# =========================================================
+# Artefactos internos del flujo de trabajo (no son entregables)
+# =========================================================
+/00-Plan-de-Trabajo.md
+.vscode/

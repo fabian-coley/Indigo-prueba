@@ -1,0 +1,171 @@
+
+:host {
+  display: block;
+}
+
+.reporte__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.reporte__titulo {
+  margin: 0 0 4px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #1a1b1f;
+}
+
+.reporte__subtitulo {
+  margin: 0;
+  max-width: 60ch;
+  font-size: 14px;
+  color: #44474e;
+}
+
+.reporte__card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.reporte__filtros {
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.reporte__campos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.reporte__campos mat-form-field {
+  width: 180px;
+}
+
+.reporte__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reporte__consultar {
+  margin-left: auto;
+}
+
+.reporte__spinner {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.reporte__ayuda {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #ba1a1a;
+}
+
+.reporte__progreso {
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.reporte__alerta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #ffdad6;
+  color: #410002;
+  font-size: 14px;
+}
+
+.reporte__alerta mat-icon {
+  flex: none;
+}
+
+.reporte__alerta span {
+  flex: 1;
+}
+
+.reporte__resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.reporte__stat {
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.reporte__stat-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #44474e;
+}
+
+.reporte__stat-valor {
+  font-size: 24px;
+  font-weight: 500;
+  color: #1a1b1f;
+}
+
+.reporte__rango {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e2ec;
+  font-size: 14px;
+  color: #44474e;
+}
+
+.reporte__rango mat-icon {
+  flex: none;
+  color: #005cbb;
+}
+
+.reporte__tabla {
+  width: 100%;
+}
+
+.reporte__num {
+  text-align: right;
+}
+
+.reporte__total {
+  font-weight: 500;
+}
+
+.reporte__vacio {
+  padding: 48px 24px;
+  text-align: center;
+  color: #44474e;
+}
+
+.reporte__vacio mat-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+  color: #74777f;
+}
+
+.reporte__vacio-titulo {
+  margin: 8px 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1b1f;
+}
+
+.reporte__vacio-texto {
+  margin: 0;
+  font-size: 14px;
+}

@@ -1,0 +1,142 @@
+
+:host {
+  display: block;
+}
+
+.formulario__cabecera {
+  margin-bottom: 20px;
+}
+
+.formulario__titulo {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: #1a1b1f;
+}
+
+.formulario__subtitulo {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #44474e;
+}
+
+.formulario__card {
+  max-width: 720px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.formulario {
+  padding: 24px;
+}
+
+.formulario__alerta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #ffdad6;
+  color: #410002;
+  font-size: 14px;
+}
+
+.formulario__alerta-icono {
+  flex: none;
+}
+
+.formulario__campos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+
+.formulario__campo {
+  flex: 1 1 200px;
+}
+
+.formulario__campo--ancho {
+  flex: 1 1 100%;
+}
+
+.imagen {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e2ec;
+}
+
+.imagen__titulo {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1b1f;
+}
+
+.imagen__ayuda {
+  margin: 4px 0 16px;
+  font-size: 13px;
+  color: #44474e;
+}
+
+.imagen__contenido {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.imagen__preview {
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.imagen__preview--vacia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #faf9fd;
+  border: 1px dashed #e0e2ec;
+  color: #74777f;
+  font-size: 32px;
+}
+
+.imagen__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.imagen__input {
+  display: none;
+}
+
+.imagen__archivo {
+  font-size: 13px;
+  color: #44474e;
+  word-break: break-all;
+}
+
+.imagen__error {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #ba1a1a;
+}
+
+.formulario__acciones {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.formulario__spinner {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  color: currentColor;
+}

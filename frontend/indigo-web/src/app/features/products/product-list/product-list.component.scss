@@ -1,0 +1,145 @@
+
+:host {
+  display: block;
+}
+
+.productos__cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.productos__titulo {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: #1a1b1f;
+}
+
+.productos__subtitulo {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #44474e;
+}
+
+.productos__filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.productos__busqueda {
+  flex: 1 1 280px;
+}
+
+.productos__categoria {
+  flex: 0 1 220px;
+}
+
+.productos__alerta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #ffdad6;
+  color: #410002;
+}
+
+.productos__alerta-icono {
+  flex: none;
+}
+
+.productos__alerta-texto {
+  flex: 1;
+  font-size: 14px;
+}
+
+.productos__card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.productos__tabla {
+  width: 100%;
+}
+
+.productos__celda-imagen {
+  width: 64px;
+}
+
+.productos__celda-numero {
+  text-align: right;
+}
+
+.productos__celda-acciones {
+  width: 96px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.productos__celda-nombre {
+  font-weight: 500;
+}
+
+.productos__miniatura {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.productos__miniatura--vacia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #faf9fd;
+  border: 1px solid #e0e2ec;
+  color: #74777f;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.productos__sin-stock {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #ffdad6;
+  color: #ba1a1a;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.productos__vacio {
+  padding: 48px 24px;
+  text-align: center;
+  color: #44474e;
+}
+
+.productos__vacio-icono {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #74777f;
+}
+
+.productos__vacio-titulo {
+  margin: 12px 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1b1f;
+}
+
+.productos__vacio-texto {
+  margin: 0;
+  font-size: 14px;
+}

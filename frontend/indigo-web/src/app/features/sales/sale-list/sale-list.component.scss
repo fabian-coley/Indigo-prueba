@@ -1,0 +1,94 @@
+
+:host {
+  display: block;
+}
+
+.ventas__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ventas__titulo {
+  margin: 0 0 4px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #1a1b1f;
+}
+
+.ventas__subtitulo {
+  margin: 0;
+  max-width: 60ch;
+  font-size: 14px;
+  color: #44474e;
+}
+
+.ventas__alerta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #ffdad6;
+  color: #410002;
+  font-size: 14px;
+
+  mat-icon {
+    flex: none;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.ventas__card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ventas__tabla {
+  width: 100%;
+}
+
+.ventas__num {
+  text-align: right;
+}
+
+.ventas__total {
+  font-weight: 500;
+}
+
+.ventas__celda-accion {
+  width: 180px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ventas__vacio {
+  padding: 48px 24px;
+  text-align: center;
+  color: #44474e;
+
+  mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: #74777f;
+  }
+}
+
+.ventas__vacio-titulo {
+  margin: 8px 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1b1f;
+}
+
+.ventas__vacio-texto {
+  margin: 0;
+  font-size: 14px;
+}

@@ -1,0 +1,50 @@
+.layout__toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  gap: 16px;
+}
+
+.layout__brand {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.layout__nav {
+  display: flex;
+  gap: 4px;
+  margin-left: 12px;
+}
+
+.layout__link--active {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.layout__spacer {
+  flex: 1 1 auto;
+}
+
+.layout__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+  font-size: 0.875rem;
+}
+
+.layout__rol {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #d7e3ff;
+  color: #005cbb;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.layout__content {
+  padding: 24px;
+}

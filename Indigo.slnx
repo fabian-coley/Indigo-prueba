@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Indigo.Api/Indigo.Api.csproj" />
+    <Project Path="src/Indigo.Application/Indigo.Application.csproj" />
+    <Project Path="src/Indigo.Domain/Indigo.Domain.csproj" />
+    <Project Path="src/Indigo.Infrastructure/Indigo.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Indigo.Api.IntegrationTests/Indigo.Api.IntegrationTests.csproj" />
+    <Project Path="tests/Indigo.Application.Tests/Indigo.Application.Tests.csproj" />
+    <Project Path="tests/Indigo.Domain.Tests/Indigo.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

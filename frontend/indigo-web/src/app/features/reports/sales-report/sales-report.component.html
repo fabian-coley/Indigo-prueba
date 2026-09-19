@@ -1,0 +1,152 @@
+<div class="reporte">
+  <header class="reporte__header">
+    <div>
+      <h1 class="reporte__titulo">Reportes</h1>
+      @if (esAdmin()) {
+        <p class="reporte__subtitulo">
+          Ventas de todos los vendedores, agrupadas por día. El alcance lo resuelve el servidor
+          según tu rol.
+        </p>
+      } @else {
+        <p class="reporte__subtitulo">
+          Tus ventas, agrupadas por día. El alcance lo resuelve el servidor según tu rol.
+        </p>
+      }
+    </div>
+  </header>
+
+  <mat-card appearance="outlined" class="reporte__card reporte__filtros">
+    <div class="reporte__campos">
+      <mat-form-field appearance="outline">
+        <mat-label>Desde</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerDesde"
+          [value]="desde()"
+          [max]="hoy"
+          (dateChange)="cambiarDesde($event)"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="pickerDesde" />
+        <mat-datepicker #pickerDesde />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Hasta</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerHasta"
+          [value]="hasta()"
+          [max]="hoy"
+          (dateChange)="cambiarHasta($event)"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="pickerHasta" />
+        <mat-datepicker #pickerHasta />
+      </mat-form-field>
+
+      <div class="reporte__presets">
+        <button mat-stroked-button type="button" (click)="aplicarUltimosDias(7)">
+          Últimos 7 días
+        </button>
+        <button mat-stroked-button type="button" (click)="aplicarUltimosDias(30)">
+          Últimos 30 días
+        </button>
+        <button mat-stroked-button type="button" (click)="aplicarMesActual()">Mes actual</button>
+      </div>
+
+      <button
+        mat-flat-button
+        type="button"
+        class="reporte__consultar"
+        [disabled]="!puedeConsultar()"
+        (click)="consultar()"
+      >
+        @if (cargando()) {
+          <mat-spinner class="reporte__spinner" diameter="18" />
+        } @else {
+          <mat-icon>search</mat-icon>
+        }
+        {{ cargando() ? 'Consultando…' : 'Consultar' }}
+      </button>
+    </div>
+
+    @if (rangoInvalido()) {
+      <p class="reporte__ayuda" role="alert">
+        La fecha «Desde» no puede ser posterior a «Hasta».
+      </p>
+    }
+  </mat-card>
+
+  @if (cargando()) {
+    <mat-progress-bar mode="indeterminate" class="reporte__progreso" />
+  }
+
+  @if (errorMessage(); as mensaje) {
+    <div class="reporte__alerta" role="alert">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ mensaje }}</span>
+      <button mat-button type="button" (click)="consultar()">Reintentar</button>
+    </div>
+  }
+
+  @if (reporte(); as datos) {
+    <section class="reporte__resumen" aria-label="Totales del período">
+      <mat-card appearance="outlined" class="reporte__stat">
+        <span class="reporte__stat-label">Total del período</span>
+        <span class="reporte__stat-valor">{{ datos.totalGeneral | currency }}</span>
+      </mat-card>
+      <mat-card appearance="outlined" class="reporte__stat">
+        <span class="reporte__stat-label">Ventas</span>
+        <span class="reporte__stat-valor">{{ datos.totalVentas }}</span>
+      </mat-card>
+      <mat-card appearance="outlined" class="reporte__stat">
+        <span class="reporte__stat-label">Unidades vendidas</span>
+        <span class="reporte__stat-valor">{{ datos.totalItems }}</span>
+      </mat-card>
+    </section>
+
+    <mat-card appearance="outlined" class="reporte__card">
+      <div class="reporte__rango">
+        <mat-icon>calendar_month</mat-icon>
+        <span>{{ formatearDia(datos.desde) }} — {{ formatearDia(datos.hasta) }}</span>
+      </div>
+
+      <table mat-table [dataSource]="dias()" class="reporte__tabla">
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>Día</th>
+          <td mat-cell *matCellDef="let dia">{{ formatearDia(dia.fecha) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ventas">
+          <th mat-header-cell *matHeaderCellDef class="reporte__num">Ventas</th>
+          <td mat-cell *matCellDef="let dia" class="reporte__num">{{ dia.ventas }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="items">
+          <th mat-header-cell *matHeaderCellDef class="reporte__num">Unidades</th>
+          <td mat-cell *matCellDef="let dia" class="reporte__num">{{ dia.items }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef class="reporte__num">Total</th>
+          <td mat-cell *matCellDef="let dia" class="reporte__num reporte__total">
+            {{ dia.total | currency }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+      </table>
+
+      @if (dias().length === 0) {
+        <div class="reporte__vacio">
+          <mat-icon>bar_chart</mat-icon>
+          <p class="reporte__vacio-titulo">Sin ventas en el período</p>
+          <p class="reporte__vacio-texto">
+            No se registraron ventas entre el {{ formatearDia(datos.desde) }} y el
+            {{ formatearDia(datos.hasta) }}. Probá con otro rango de fechas.
+          </p>
+        </div>
+      }
+    </mat-card>
+  }
+</div>

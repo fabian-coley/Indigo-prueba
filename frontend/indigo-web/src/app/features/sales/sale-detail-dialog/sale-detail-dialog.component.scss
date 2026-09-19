@@ -1,0 +1,70 @@
+
+.detalle {
+  width: min(560px, 78vw);
+  padding-top: 4px;
+}
+
+.detalle__datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px 20px;
+  margin: 0 0 16px;
+  padding: 0 0 16px;
+  border-bottom: 1px solid #e0e2ec;
+}
+
+.detalle__dato {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+
+  dt {
+    font-size: 12px;
+    color: #44474e;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1b1f;
+    overflow-wrap: anywhere;
+  }
+
+  .detalle__total {
+    color: #005cbb;
+  }
+}
+
+.detalle__alerta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #ffdad6;
+  color: #410002;
+  font-size: 14px;
+
+  mat-icon {
+    flex: none;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.detalle__tabla {
+  width: 100%;
+}
+
+.detalle__num {
+  text-align: right;
+}
+
+.detalle__subtotal {
+  font-weight: 500;
+}

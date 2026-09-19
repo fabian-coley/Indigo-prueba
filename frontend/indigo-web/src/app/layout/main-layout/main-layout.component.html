@@ -1,0 +1,33 @@
+<mat-toolbar class="layout__toolbar">
+  <span class="layout__brand">Indigo</span>
+
+  <nav class="layout__nav">
+    <a mat-button routerLink="/productos" routerLinkActive="layout__link--active" [routerLinkActiveOptions]="{ exact: true }">
+      Productos
+    </a>
+    <a mat-button routerLink="/ventas" routerLinkActive="layout__link--active" [routerLinkActiveOptions]="{ exact: true }">
+      Ventas
+    </a>
+    <a mat-button routerLink="/ventas/nueva" routerLinkActive="layout__link--active">Nueva venta</a>
+    <a mat-button routerLink="/reportes" routerLinkActive="layout__link--active">Reportes</a>
+  </nav>
+
+  <span class="layout__spacer"></span>
+
+  @if (currentUser(); as session) {
+    <span class="layout__user">
+      {{ session.email }}
+      @if (rolPrincipal(); as rol) {
+        <span class="layout__rol">{{ rol }}</span>
+      }
+    </span>
+  }
+
+  <button mat-icon-button type="button" matTooltip="Cerrar sesión" aria-label="Cerrar sesión" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<main class="layout__content">
+  <router-outlet />
+</main>

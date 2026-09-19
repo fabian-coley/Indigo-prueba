@@ -1,0 +1,111 @@
+<div class="formulario__cabecera">
+  <h1 class="formulario__titulo">{{ esEdicion() ? 'Editar producto' : 'Nuevo producto' }}</h1>
+  <p class="formulario__subtitulo">
+    {{ esEdicion() ? 'Modificá los datos y guardá los cambios.' : 'Cargá los datos del producto y, si querés, su imagen.' }}
+  </p>
+</div>
+
+<mat-card class="formulario__card" appearance="outlined">
+  @if (cargando()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <form class="formulario" [formGroup]="form" (ngSubmit)="submit()">
+    @if (errorMessage(); as mensaje) {
+      <div class="formulario__alerta" role="alert">
+        <mat-icon class="formulario__alerta-icono">error_outline</mat-icon>
+        <span>{{ mensaje }}</span>
+      </div>
+    }
+
+    <div class="formulario__campos">
+      <mat-form-field class="formulario__campo formulario__campo--ancho" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" maxlength="120" placeholder="Ej.: Café molido 500 g" />
+        @if (campoError('nombre'); as mensaje) {
+          <mat-error>{{ mensaje }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="formulario__campo" appearance="outline">
+        <mat-label>Precio</mat-label>
+        <span matPrefix>$&nbsp;</span>
+        <input matInput type="number" formControlName="precio" min="0.01" step="0.01" placeholder="0,00" />
+        @if (campoError('precio'); as mensaje) {
+          <mat-error>{{ mensaje }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="formulario__campo" appearance="outline">
+        <mat-label>Stock</mat-label>
+        <input matInput type="number" formControlName="stock" min="0" step="1" placeholder="0" />
+        @if (campoError('stock'); as mensaje) {
+          <mat-error>{{ mensaje }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="formulario__campo" appearance="outline">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="categoria" placeholder="Elegí una categoría">
+          @for (opcion of categorias; track opcion) {
+            <mat-option [value]="opcion">{{ opcion }}</mat-option>
+          }
+        </mat-select>
+        @if (campoError('categoria'); as mensaje) {
+          <mat-error>{{ mensaje }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <section class="imagen">
+      <h2 class="imagen__titulo">Imagen</h2>
+      <p class="imagen__ayuda">
+        JPG, PNG o WebP, hasta 5 MB. La imagen se sube después de guardar los datos.
+      </p>
+
+      <div class="imagen__contenido">
+        @if (imagenMostrada(); as url) {
+          <img class="imagen__preview" [src]="url" alt="Vista previa del producto" />
+        } @else {
+          <span class="imagen__preview imagen__preview--vacia">
+            <mat-icon>image</mat-icon>
+          </span>
+        }
+
+        <div class="imagen__acciones">
+          <input
+            #archivoInput
+            class="imagen__input"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            (change)="onArchivo($event)"
+          />
+
+          <button mat-stroked-button type="button" (click)="archivoInput.click()">
+            <mat-icon>{{ imagenMostrada() ? 'swap_horiz' : 'upload' }}</mat-icon>
+            {{ imagenMostrada() ? 'Cambiar imagen' : 'Elegir imagen' }}
+          </button>
+
+          @if (archivo(); as seleccionado) {
+            <button mat-button type="button" (click)="quitarSeleccion(archivoInput)">Quitar</button>
+            <span class="imagen__archivo">{{ seleccionado.name }}</span>
+          }
+        </div>
+      </div>
+
+      @if (errorImagen(); as mensaje) {
+        <p class="imagen__error" role="alert">{{ mensaje }}</p>
+      }
+    </section>
+
+    <div class="formulario__acciones">
+      <a mat-button routerLink="/productos">Cancelar</a>
+      <button mat-flat-button color="primary" type="submit" [disabled]="guardando() || cargando()">
+        @if (guardando()) {
+          <mat-spinner class="formulario__spinner" diameter="18" />
+        }
+        {{ esEdicion() ? 'Guardar cambios' : 'Crear producto' }}
+      </button>
+    </div>
+  </form>
+</mat-card>

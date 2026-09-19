@@ -1,0 +1,139 @@
+<div class="productos__cabecera">
+  <div>
+    <h1 class="productos__titulo">Productos</h1>
+    <p class="productos__subtitulo">Catálogo paginado y filtrado desde el servidor.</p>
+  </div>
+
+  @if (esAdmin()) {
+    <a mat-flat-button color="primary" routerLink="/productos/nuevo">
+      <mat-icon>add</mat-icon>
+      Nuevo producto
+    </a>
+  }
+</div>
+
+<div class="productos__filtros">
+  <mat-form-field class="productos__busqueda" appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Buscar por nombre</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="search" [formControl]="busqueda" placeholder="Ej.: Café" />
+  </mat-form-field>
+
+  <mat-form-field class="productos__categoria" appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Categoría</mat-label>
+    <mat-select [value]="categoria()" (selectionChange)="cambiarCategoria($event.value)">
+      <mat-option [value]="null">Todas</mat-option>
+      @for (opcion of categorias; track opcion) {
+        <mat-option [value]="opcion">{{ opcion }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+@if (errorMessage(); as mensaje) {
+  <div class="productos__alerta" role="alert">
+    <mat-icon class="productos__alerta-icono">error_outline</mat-icon>
+    <span class="productos__alerta-texto">{{ mensaje }}</span>
+    <button mat-button type="button" (click)="cargar()">Reintentar</button>
+  </div>
+}
+
+<mat-card class="productos__card" appearance="outlined">
+  @if (cargando()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <table mat-table [dataSource]="productos()" class="productos__tabla">
+    <ng-container matColumnDef="imagen">
+      <th mat-header-cell *matHeaderCellDef class="productos__celda-imagen"></th>
+      <td mat-cell *matCellDef="let producto" class="productos__celda-imagen">
+        @if (producto.imagenUrl) {
+          <img class="productos__miniatura" [src]="producto.imagenUrl" [alt]="producto.nombre" />
+        } @else {
+          <span class="productos__miniatura productos__miniatura--vacia">
+            <mat-icon>image</mat-icon>
+          </span>
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let producto" class="productos__celda-nombre">{{ producto.nombre }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef>Categoría</th>
+      <td mat-cell *matCellDef="let producto">{{ producto.categoria }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="precio">
+      <th mat-header-cell *matHeaderCellDef class="productos__celda-numero">Precio</th>
+      <td mat-cell *matCellDef="let producto" class="productos__celda-numero">
+        {{ producto.precio | currency }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stock">
+      <th mat-header-cell *matHeaderCellDef class="productos__celda-numero">Stock</th>
+      <td mat-cell *matCellDef="let producto" class="productos__celda-numero">
+        @if (producto.stock === 0) {
+          <span class="productos__sin-stock">Sin stock</span>
+        } @else {
+          {{ producto.stock }}
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef class="productos__celda-acciones"></th>
+      <td mat-cell *matCellDef="let producto" class="productos__celda-acciones">
+        <a
+          mat-icon-button
+          [routerLink]="['/productos', producto.id, 'editar']"
+          matTooltip="Editar"
+          aria-label="Editar"
+        >
+          <mat-icon>edit</mat-icon>
+        </a>
+        <button
+          mat-icon-button
+          type="button"
+          matTooltip="Eliminar"
+          aria-label="Eliminar"
+          (click)="eliminar(producto)"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas()"></tr>
+    <tr mat-row *matRowDef="let fila; columns: columnas()"></tr>
+  </table>
+
+  @if (!cargando() && productos().length === 0 && !errorMessage()) {
+    <div class="productos__vacio">
+      <mat-icon class="productos__vacio-icono">inventory_2</mat-icon>
+      <p class="productos__vacio-titulo">No hay productos para mostrar</p>
+      <p class="productos__vacio-texto">
+        @if (busqueda.value.trim() || categoria()) {
+          Probá con otro texto de búsqueda o quitá el filtro de categoría.
+        } @else {
+          Todavía no se cargó ningún producto.
+        }
+      </p>
+    </div>
+  }
+
+  @if (totalItems() > 0) {
+    <mat-paginator
+      [length]="totalItems()"
+      [pageIndex]="pageIndex()"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="opcionesPagina"
+      [showFirstLastButtons]="true"
+      (page)="cambiarPagina($event)"
+    />
+  }
+</mat-card>
